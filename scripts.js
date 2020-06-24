@@ -79,8 +79,11 @@ function renderTaskItems() {
 
         let titleEl = document.createElement("label");
         titleEl.innerText = task.title;
-        itemEl.append(titleEl);
+        if (task.vip){
+            titleEl.setAttribute('class', 'vip-color');
+        }
 
+        itemEl.append(titleEl);
         let ctrlbarEl = renderTaskCtrlBar(tasks, i);
 
         itemEl.append(ctrlbarEl);
@@ -105,9 +108,11 @@ function renderTaskCtrlBar(tasks, taskIdx) {
         if (tasks[taskIdx].vip) {
             tasks[taskIdx].vip = false;
             viptagEl.innerText = "✰";
+            viptagEl.parentNode.parentNode.removeAttribute('style', 'color: saddlebrown;');
         } else {
             tasks[taskIdx].vip = true;
             viptagEl.innerText = "⭐";
+            viptagEl.parentNode.parentNode.setAttribute('style', 'color: saddlebrown;');
         }
     }
 
